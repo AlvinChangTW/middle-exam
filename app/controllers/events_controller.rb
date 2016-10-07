@@ -1,7 +1,7 @@
 class EventsController < ApplicationController
 before_action :authenticate_user!
   def index
-    @events = Event.all
+    @events = Event.all.page(params[:page]).per(5)
   end
   def new
     @event = Event.new

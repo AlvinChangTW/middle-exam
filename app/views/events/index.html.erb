@@ -1,3 +1,4 @@
+<h2>地震應變中心</h2>
 <%= link_to "地震災情",events_path%>
 <%= link_to "新增災情",new_event_path%>
 <% @events.each do |e|%>
@@ -5,3 +6,5 @@
   <%= e.category.try(:name)%>
   <%= e.created_at%>
 <% end %>
+
+<%= paginate @events%>
