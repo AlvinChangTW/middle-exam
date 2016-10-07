@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-#before_action :authenticate_user!
+before_action :authenticate_user!
   def index
     @events = Event.all
   end
@@ -8,6 +8,7 @@ class EventsController < ApplicationController
   end
   def create
     @event=Event.new(event_params)
+    @event.user = current_user
     if @event.save
       flash[:notice]="新增成功"
       redirect_to events_path
@@ -21,6 +22,7 @@ class EventsController < ApplicationController
   end
   def edit
     @event = Event.find(params[:id])
+    @event.user = current_user
   end
   def update
     @event = Event.find(params[:id])
@@ -39,6 +41,6 @@ class EventsController < ApplicationController
   end
   private
   def event_params
-    params.require(:event).permit(:name, :description, :category_id)
+    params.require(:event).permit(:name, :description, :category_id,:user_id)
   end
 end

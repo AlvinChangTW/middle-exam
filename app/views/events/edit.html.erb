@@ -1,4 +1,11 @@
 <%= form_for @event, :url=>event_path,:method=>:patch do |f|%>
+  <% if @event.errors.any? %>
+  <ul>
+  <% @event.errors.full_messages.each do |msg| %>
+    <li style="color:red"><%= msg %></li>
+  <% end %>
+  </ul>
+<% end %>
   <%= f.label :name,"災情地區"%>
   <%= f.text_field :name%>
   <%= f.collection_select(:category_id, Category.all, :id, :name) %>

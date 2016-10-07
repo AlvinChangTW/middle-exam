@@ -2,5 +2,6 @@
 <%= link_to "新增災情",new_event_path%>
 <% @events.each do |e|%>
   <%= link_to e.name, event_path(e)%>
+  <%= e.category.try(:name)%>
   <%= e.created_at%>
 <% end %>
