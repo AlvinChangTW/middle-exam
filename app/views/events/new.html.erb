@@ -1,0 +1,7 @@
+<%= form_for @event, :url=>events_path do |f|%>
+  <%= f.label :name,"災情地區"%>
+  <%= f.text_field :name%>
+  <%= f.label :description,"災情內容"%>
+  <%= f.text_area :description%>
+  <%= f.submit "新增"%>
+<% end %>

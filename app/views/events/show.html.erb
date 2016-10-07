@@ -1,0 +1,7 @@
+
+地區<%= @event.name%>
+內容<%= @event.description%>
+
+<%= link_to "修改內容", edit_event_path(@event)%>
+<%= link_to "刪除災情", event_path(@event),:method=>:delete%>
+

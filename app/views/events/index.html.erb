@@ -1,4 +1,5 @@
 <%= link_to "地震災情",events_path%>
-<%= @events.each do |e|%>
-  <%= e.name%>
+<%= link_to "新增災情",new_event_path%>
+<% @events.each do |e|%>
+  <%= link_to e.name, event_path(e)%>
 <% end %>
