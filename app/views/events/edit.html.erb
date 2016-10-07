@@ -1,7 +1,10 @@
 <%= form_for @event, :url=>event_path,:method=>:patch do |f|%>
   <%= f.label :name,"災情地區"%>
   <%= f.text_field :name%>
+  <%= f.collection_select(:category_id, Category.all, :id, :name) %>
   <%= f.label :description,"災情內容"%>
   <%= f.text_area :description%>
   <%= f.submit "修改"%>
 <% end %>
+
+<%= link_to "返回主頁",events_path%>
