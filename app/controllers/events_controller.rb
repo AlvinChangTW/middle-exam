@@ -1,7 +1,7 @@
 class EventsController < ApplicationController
 before_action :authenticate_user!, :except =>[:index]
   def index
-    @events = Event.all.page(params[:page]).per(5)
+    @events = Event.all.page(params[:page]).per(10)
   end
   def new
     @event = Event.new

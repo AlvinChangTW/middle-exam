@@ -1,11 +1,26 @@
-<h2>地震應變中心</h2>
-<%= link_to "地震災情",events_path%>
-<%= link_to "新增災情",new_event_path%>
-<% @events.each do |e|%>
-  <%= link_to e.name, event_path(e)%>
-  <%= e.category.try(:name)%>
-  <%= e.created_at%>
-  <%= link_to "刪除", event_path(e),:method => :delete%>
-<% end %>
 
+<table class="table table-inverse">
+
+  <thead>
+    <tr>
+      <th>地震地區</th>
+      <th>類別</th>
+      <th>時間</th>
+      <th>修改內容</th>
+      <th>刪除</th>
+    </tr>
+  </thead>
+  <tbody>
+
+    <% @events.each do |e|%>
+    <tr>
+      <td><%= link_to e.name, event_path(e)%></td>
+      <td><%= e.category.try(:name)%></td>
+      <td><%= e.created_at%></td>
+      <td><%= link_to "修改內容", edit_event_path(e)%></td>
+      <td><%= link_to "刪除", event_path(e),:method => :delete%></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
 <%= paginate @events%>
