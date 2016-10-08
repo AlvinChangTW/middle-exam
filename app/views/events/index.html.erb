@@ -17,10 +17,12 @@
       <td><%= link_to e.name, event_path(e)%></td>
       <td><%= e.category.try(:name)%></td>
       <td><%= e.created_at%></td>
-      <td><%= link_to "修改內容", edit_event_path(e)%></td>
-      <td><%= link_to "刪除", event_path(e),:method => :delete%></td>
+      <td><%= link_to "修改內容", edit_event_path(e),:class=>"btn btn-primary"%></td>
+      <td><%= link_to "刪除", event_path(e),:method => :delete,:class=>"btn btn-danger"%></td>
     </tr>
   <% end %>
   </tbody>
 </table>
-<%= paginate @events%>
+<ul class="pager">
+  <li><%= paginate @events%></li>
+</ul>

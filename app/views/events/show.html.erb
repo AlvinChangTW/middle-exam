@@ -1,15 +1,21 @@
-
-地區<%= @event.name%>
-內容<%= @event.description%>
-
-<%= link_to "修改內容", edit_event_path(@event)%>
-<%= link_to "刪除災情", event_path(@event),:method=>:delete %>
+<ul class="list-group">
+  <li class="list-group-item">地區:  <%= @event.name%></li>
+  <li class="list-group-item">類別:  <%= @event.category.name%></li>
+  <li class="list-group-item">內容:  <%= @event.description%></li>
+</ul>
+<ul class="list-group">
+<h3>留言：</h3>
 <% @event.comments.each do |c|%>
-  <%= c.content%>
-  <%= link_to "刪除留言", event_comment_path(@event,c.id),:method => :delete %>
+  <li class="list-group-item">
+    <%= c.content%>
+    <%= link_to "刪除留言", event_comment_path(@event,c.id),:method => :delete,:class=>"btn btn-danger pull-right" %>
+  </li>
 <% end %>
+</ul>
+ <div class="form-group">
 <%= form_for @comment,:url=>event_comments_path(@event) do |f|%>
-  <%=f.text_area :content %>
-  <%=f.submit "新增留言"%>
+  <%=f.text_area :content ,:class=>"form-control"%>
+  <%=f.submit "新增留言",:class=>"btn btn-success"%>
 <% end %>
-<%= link_to "返回主頁",events_path%>
+</div>
+<%= link_to "返回主頁",events_path,:class=>"btn btn-info"%>

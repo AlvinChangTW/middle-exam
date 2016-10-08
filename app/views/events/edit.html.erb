@@ -1,17 +1,6 @@
 <%= form_for @event, :url=>event_path,:method=>:patch do |f|%>
-  <% if @event.errors.any? %>
-  <ul>
-  <% @event.errors.full_messages.each do |msg| %>
-    <li style="color:red"><%= msg %></li>
-  <% end %>
-  </ul>
-<% end %>
-  <%= f.label :name,"災情地區"%>
-  <%= f.text_field :name%>
-  <%= f.collection_select(:category_id, Category.all, :id, :name) %>
-  <%= f.label :description,"災情內容"%>
-  <%= f.text_area :description%>
-  <%= f.submit "修改"%>
+<%= render :partial => "form", :locals=>{:f=>f}%>
+  <%= f.submit "修改",:class=>"btn btn-success"%>
 <% end %>
 
-<%= link_to "返回主頁",events_path%>
+<%= link_to "返回主頁",events_path,:class=>"btn btn-info"%>
