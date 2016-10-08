@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-before_action :authenticate_user!
+before_action :authenticate_user!, :except =>[:index]
   def index
     @events = Event.all.page(params[:page]).per(5)
   end
@@ -13,16 +13,22 @@ before_action :authenticate_user!
       flash[:notice]="新增成功"
       redirect_to events_path
     else
-      render :action =>:new
       flash[:alert]="新增失敗"
+      render :action =>:new
     end
   end
   def show
     @event = Event.find(params[:id])
+    @comment = Comment.new
   end
   def edit
     @event = Event.find(params[:id])
-    @event.user = current_user
+    if @event.user == current_user
+    else
+      redirect_to event_path(@event)
+      flash[:alert]="沒有權限"
+    end
+
   end
   def update
     @event = Event.find(params[:id])
@@ -36,8 +42,15 @@ before_action :authenticate_user!
   end
   def destroy
     @event = Event.find(params[:id])
-    @event.destroy
-    redirect_to events_path
+    if @event.user == current_user
+      @event.destroy
+      flash[:notice]="刪除成功"
+      redirect_to events_path
+    else
+      redirect_to event_path(@event)
+      flash[:alert]="沒有權限"
+    end
+
   end
   private
   def event_params

@@ -5,6 +5,7 @@
   <%= link_to e.name, event_path(e)%>
   <%= e.category.try(:name)%>
   <%= e.created_at%>
+  <%= link_to "刪除", event_path(e),:method => :delete%>
 <% end %>
 
 <%= paginate @events%>

@@ -3,6 +3,13 @@
 內容<%= @event.description%>
 
 <%= link_to "修改內容", edit_event_path(@event)%>
-<%= link_to "刪除災情", event_path(@event),:method=>:delete%>
-
+<%= link_to "刪除災情", event_path(@event),:method=>:delete %>
+<% @event.comments.each do |c|%>
+  <%= c.content%>
+  <%= link_to "刪除留言", event_comment_path(@event,c.id),:method => :delete %>
+<% end %>
+<%= form_for @comment,:url=>event_comments_path(@event) do |f|%>
+  <%=f.text_area :content %>
+  <%=f.submit "新增留言"%>
+<% end %>
 <%= link_to "返回主頁",events_path%>
